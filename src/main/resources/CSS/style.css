@@ -3,14 +3,14 @@
 }
 
 .registrationBackground {
-    -fx-background-position: top, top;
+    -fx-background-position: top, bottom;
     -fx-background-repeat: repeat-x, repeat-x;
     -fx-background-image: url("/Images/Register/RegisterBG_layer0.png"),
                             url("/Images/Register/RegisterBG_layer1.png");
 }
 
 .mainMenuBackground {
-    -fx-background-position: top, top, top;
+    -fx-background-position: top, bottom, bottom;
     -fx-background-repeat: repeat-x, repeat-x, repeat-x;
     -fx-background-image: url("/Images/MainMenu/RegisterBG_layer0.png"),
                             url("/Images/MainMenu/MainBG_layer1.png"),

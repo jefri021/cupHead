@@ -12,7 +12,7 @@ public class Bomb extends ImageView {
     public Bomb() {
         this.setImage(new Image("/Images/Game/Bomb/Travel/0.png"));
         this.setX(Game.getPlane().getX() + 20);
-        this.setY(Game.getPlane().getY() + 10);
+        this.setY(Game.getPlane().getY() + 60);
     }
 
     public void move (double dx, double dy) {

@@ -8,7 +8,9 @@ import View.Components.Bullet;
 import View.Components.Egg;
 import View.Components.MiniBoss;
 import View.Transitions.*;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -17,6 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.Random;
@@ -24,8 +27,9 @@ import java.util.Random;
 public class GamePageController implements DefaultAnimation {
     public Pane background;
     public ImageView ammoIcon;
+    private Timeline timeLine;
 
-    private final Random random = new Random(0);
+    private Random random = new Random(0);
     private boolean spacePressed;
     private ZonedDateTime spacePressedTime = null;
     private boolean leftPressed;
@@ -33,26 +37,29 @@ public class GamePageController implements DefaultAnimation {
     private boolean upPressed;
     private boolean downPressed;
     private AmmoType ammo;
+    private Label timeLabel;
 
     private Rectangle bossHealth;
+    private long startTime;
+    private int totalMiniBossKill;
 
-    public void initialize() {
+    private void initEverything() {
+        random = new Random(0);
+        spacePressed = leftPressed = rightPressed = downPressed = upPressed = false;
+        ammo = AmmoType.BULLET;
+        timeLabel = new Label();
+        bossHealth = new Rectangle();
+        startTime = Clock.systemUTC().millis();
+        totalMiniBossKill = 0;
         background.getChildren().add(Game.getPlane());
         background.getChildren().add(Game.getBoss());
 
-        ammo = AmmoType.BULLET;
         ammoIcon = new ImageView(new Image(ammo.getUrl()));
         ammoIcon.setFitWidth(80);
         ammoIcon.setFitHeight(80);
         ammoIcon.setX(5);
         ammoIcon.setY(715);
         background.getChildren().add(ammoIcon);
-
-        background.getChildren().get(0).setOnKeyPressed(event -> setBooleans(event.getCode().toString(), true));
-
-        background.getChildren().get(0).setOnKeyReleased(event -> setBooleans(event.getCode().toString(), false));
-
-        background.setOnMouseClicked(event -> System.out.println("x = " + event.getSceneX() + ", y = " + event.getSceneY()));
 
         Region bossHealthBar = new Region();
         bossHealthBar.setLayoutX(550);
@@ -72,7 +79,22 @@ public class GamePageController implements DefaultAnimation {
         bossHealth.setFill(Color.rgb(214, 44, 71, 1));
         background.getChildren().add(bossHealth);
 
-        App.getTimeLine(background, this).play();
+        timeLabel = new Label();
+        background.getChildren().add(timeLabel);
+
+    }
+
+    public void initialize() {
+        initEverything();
+
+        background.getChildren().get(0).setOnKeyPressed(event -> setBooleans(event.getCode().toString(), true));
+
+        background.getChildren().get(0).setOnKeyReleased(event -> setBooleans(event.getCode().toString(), false));
+
+        background.setOnMouseClicked(event -> System.out.println("x = " + event.getSceneX() + ", y = " + event.getSceneY()));
+
+        timeLine = App.getTimeLine(background, this);
+        timeLine.play();
     }
 
     private void managePlane() {
@@ -176,6 +198,7 @@ public class GamePageController implements DefaultAnimation {
                 if (miniBoss.intersects(Game.getAllBullets().get(i).getBoundsInParent())) {
                     miniBoss.hit(background, false);
                     Game.getAllBullets().get(i).explode(background);
+                    totalMiniBossKill++;
                     i--;
                     break;
                 }
@@ -194,23 +217,30 @@ public class GamePageController implements DefaultAnimation {
                 if (miniBoss.intersects(Game.getAllBombs().get(i).getBoundsInParent())) {
                     miniBoss.hit(background, true);
                     Game.getAllBombs().get(i).explode(background);
+                    totalMiniBossKill++;
                     i--;
                     break;
                 }
             }
         }
+
+        if (Game.getPlane().getHealth() <= 0) endGame();
+
     }
 
     private void updateHealthBar() {
-        bossHealth.setWidth(Game.getBoss().getHealth() * 2.5 - 5);
+        bossHealth.setWidth(Game.getBoss().getHealth() * 0.833 - 5);
     }
 
     private void changeBossStatus() {
         if (Game.getBoss().getHealth() <= 0) {
             Game.getBoss().getBossAnimation().stop();
-            new BossDeathAnimation().play();
+            BossDeathAnimation animation = new BossDeathAnimation();
+            animation.play();
+            animation.setOnFinished(event -> endGame());
+            timeLine.stop();
         }
-        else if (Game.getBoss().getHealth() % 49 == 0) {
+        else if (Game.getBoss().getHealth() % 20 == 0 && random.nextBoolean()) {
             Game.getBoss().getBossAnimation().stop();
 
             BossEggAttackAnimation animation = new BossEggAttackAnimation(background);
@@ -221,6 +251,13 @@ public class GamePageController implements DefaultAnimation {
 
     @Override
     public void setTimeLine(Pane pane, double xPosition) {
+        long time = (Clock.systemUTC().millis() - startTime) / 1000;
+        timeLabel.setText(Long.toString(time / 60) + ':' + (time % 60));
+        timeLabel.setLayoutX(20);
+        timeLabel.setLayoutY(680);
+        timeLabel.setStyle("-fx-font-family: 'Macondo'; -fx-font-size: 35; -fx-font-weight: bold;");
+
+
         managePlane();
 
         if (noMiniBossOnMap() && random.nextBoolean() && random.nextBoolean())
@@ -239,8 +276,6 @@ public class GamePageController implements DefaultAnimation {
                 "left " + xPosition * 4.5 * 3 + "px bottom;";
         pane.setStyle(style);
     }
-
-    //OverRide... kinda
 
     private boolean bulletIntersectsBoss(ImageView bullet, ImageView boss) {
         if (!bullet.intersects(boss.getBoundsInParent()) || bullet.getY() < 223) return false;
@@ -273,6 +308,15 @@ public class GamePageController implements DefaultAnimation {
         double minY = -1.2 * bomb.getX() + 1501;
 
         return minY < bomb.getY();
+    }
+
+    private void endGame() {
+        int score = 0, time = (int)(Clock.systemUTC().millis() - startTime) / 1000;
+        if (Game.getBoss().getHealth() <= 0 && time < 120) score = (int)(1.1 * (120 - time));
+        score += totalMiniBossKill;
+        Game.getPlayer().updateScore(score);
+        timeLine.stop();
+        App.changePage("MainMenuPage");
     }
 
 }

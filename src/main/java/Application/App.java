@@ -14,8 +14,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -45,6 +49,7 @@ public class App extends Application {
         Scene scene = new Scene(pane);
         App.scene = scene;
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.setResizable(false);
         stage.setTitle("CupHead");
         stage.getIcons().add(new Image("Images/icon.png"));

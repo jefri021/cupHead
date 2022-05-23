@@ -37,7 +37,7 @@ public class Plane extends ImageView {
     }
 
     public void hitMiniBoss() {
-        this.health -= 3;
+        this.health -= 5;
         new PlaneBlinkAnimation().play();
     }
 

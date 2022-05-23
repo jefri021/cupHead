@@ -2,6 +2,7 @@ package View;
 
 import Application.App;
 import Controller.LoginAndRegistrationController;
+import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,11 +15,14 @@ public class LoginAndRegistrationPageController implements DefaultAnimation {
     public Pane background;
     public TextField username;
     public TextField password;
+    private Timeline timeLine;
 
     public void login() {
         if (username.getText().length() == 0 || password.getText().length() == 0) return;
-        if (LoginAndRegistrationController.loggedInSuccessfully(username.getText(), password.getText()))
+        if (LoginAndRegistrationController.loggedInSuccessfully(username.getText(), password.getText())) {
+            timeLine.stop();
             App.changePage("MainMenuPage");
+        }
         else showMessage("incorrect username or password");
     }
 
@@ -38,7 +42,8 @@ public class LoginAndRegistrationPageController implements DefaultAnimation {
         username.setCursor(Cursor.TEXT);
         password.setCursor(Cursor.TEXT);
 
-        App.getTimeLine(background, this).play();
+        timeLine = App.getTimeLine(background, this);
+        timeLine.play();
     }
 
     public void showMessage (String message) {
@@ -57,7 +62,7 @@ public class LoginAndRegistrationPageController implements DefaultAnimation {
     public void setTimeLine (Pane pane, double xPosition) {
         String style = "-fx-background-position: " +
                 "left " + xPosition * 0.6 * 3 + "px top," +
-                "left " + xPosition * 0.9 * 3 + "px top;";
+                "left " + xPosition * 0.9 * 3 + "px bottom;";
         pane.setStyle(style);
     }
 }

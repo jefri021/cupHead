@@ -5,11 +5,10 @@ import Model.Database;
 import Model.Game;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
-import javafx.event.EventHandler;
+import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -17,12 +16,14 @@ import javafx.util.Duration;
 
 public class MainMenuPageController implements DefaultAnimation {
     public Pane background;
+    private Timeline timeline;
 
     public void initialize() {
         startGameInit();
         initCustomButton((VBox)background.getChildren().get(1));
         initCustomButton((VBox)background.getChildren().get(2));
-        App.getTimeLine(background, this).play();
+        timeline = App.getTimeLine(background, this);
+        timeline.play();
     }
 
     private void startGameInit() {
@@ -30,9 +31,7 @@ public class MainMenuPageController implements DefaultAnimation {
         ImageView imageView = (ImageView) box.getChildren().get(0);
         Label label = (Label) box.getChildren().get(1);
 
-        box.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
+        box.setOnMouseEntered(mouseEvent ->  {
                 box.setLayoutX(524);
                 box.setLayoutY(30);
                 box.setMaxSize(imageView.getFitWidth() * 1.2, imageView.getFitHeight() * 1.2);
@@ -42,12 +41,9 @@ public class MainMenuPageController implements DefaultAnimation {
                 imageView.setY(5);
                 finalizeIMG(imageView);
                 flashLabel(label, true);
-            }
         });
 
-        box.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
+        box.setOnMouseExited(mouseEvent ->  {
                 box.setLayoutX(570);
                 box.setLayoutY(35);
                 box.setMaxSize(imageView.getFitWidth() * 0.83333, imageView.getFitHeight() * 0.83333);
@@ -57,7 +53,6 @@ public class MainMenuPageController implements DefaultAnimation {
                 imageView.setY(0);
                 finalizeIMG(imageView);
                 flashLabel(label, false);
-            }
         });
     }
 
@@ -77,19 +72,9 @@ public class MainMenuPageController implements DefaultAnimation {
         ImageView imageView = (ImageView)box.getChildren().get(0);
         Label label = (Label)box.getChildren().get(1);
 
-        imageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                imageView.setCursor(Cursor.HAND);
-            }
-        });
+        imageView.setOnMouseEntered(mouseEvent -> imageView.setCursor(Cursor.HAND));
 
-        label.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                label.setCursor(Cursor.HAND);
-            }
-        });
+        label.setOnMouseEntered(mouseEvent -> label.setCursor(Cursor.HAND));
     }
 
     private void flashLabel (Label label, boolean doFlash) {
@@ -105,14 +90,17 @@ public class MainMenuPageController implements DefaultAnimation {
 
     public void startGame() {
         Game.startNewGame(Database.getInstance().getLoggedInUser());
+        timeline.stop();
         App.changePage("GamePage");
     }
 
     public void profile() {
+        timeline.stop();
         App.changePage("ProfileMenuPage");
     }
 
     public void scoreBoard() {
+        timeline.stop();
         App.changePage("ScoreboardPage");
     }
 
@@ -120,7 +108,7 @@ public class MainMenuPageController implements DefaultAnimation {
     public void setTimeLine(Pane pane, double xPosition) {
         String style = "-fx-background-position: " +
                 "left " + xPosition * 0.5 * 3+ "px top," +
-                "left " + xPosition * 3 + "px top," +
+                "left " + xPosition * 3 + "px bottom," +
                 "left " + xPosition * 1.1 * 3 + "px bottom;";
         pane.setStyle(style);
     }

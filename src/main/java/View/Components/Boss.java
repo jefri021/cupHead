@@ -18,7 +18,7 @@ public class Boss extends ImageView {
         this.setImage(new Image("/Images/Game/Boss/0.gif"));
         this.setLayoutX(900);
         this.setLayoutY(150);
-        this.health = 200;
+        this.health = 10;
         bossAnimation = new BossAnimation();
         bossAnimation.play();
     }
@@ -32,7 +32,7 @@ public class Boss extends ImageView {
     }
 
     public void getBombed() {
-        this.health -= 5;
+        this.health -= 10;
         System.out.println("lol bombed");
     }
 }

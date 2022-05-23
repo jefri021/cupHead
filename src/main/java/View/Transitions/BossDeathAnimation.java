@@ -10,8 +10,7 @@ public class BossDeathAnimation extends Transition {
 
     public BossDeathAnimation() {
         this.setCycleCount(1);
-        this.setCycleDuration(Duration.millis(1500));
-        this.setOnFinished(event -> App.changePage("MainMenuPage"));
+        this.setCycleDuration(Duration.millis(1200));
     }
 
     @Override

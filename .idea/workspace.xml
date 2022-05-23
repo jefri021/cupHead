@@ -4,7 +4,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b7bb02-c83e-4cb8-9f23-027629945501" name="Changes" comment="" />
+    <list default="true" id="44b7bb02-c83e-4cb8-9f23-027629945501" name="Changes" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UsersList.json" beforeDir="false" afterPath="$PROJECT_DIR$/UsersList.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Application/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Bomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Boss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Plane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/GamePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/GamePageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/LoginAndRegistrationPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/LoginAndRegistrationPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainMenuPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainMenuPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Transitions/BossDeathAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Transitions/BossDeathAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CSS/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CSS/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Application/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Application/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CSS/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CSS/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/LoginAndRegistrationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/LoginAndRegistrationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/AmmoType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/AmmoType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Database$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Database$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Bomb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Bomb.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Boss.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Boss.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Bullet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Egg.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Egg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/MiniBoss.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/MiniBoss.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Plane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Plane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/DefaultAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/DefaultAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/LoginAndRegistrationPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/LoginAndRegistrationPageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenuPageController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenuPageController$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenuPageController$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenuPageController$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenuPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/MainMenuPageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/ProfileMenuPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ProfileMenuPageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/ScoreboardPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/ScoreboardPageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BombExplosionAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BombExplosionAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BombMovementAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BombMovementAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BossAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BossAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BossDeathAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BossDeathAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BossEggAttackAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BossEggAttackAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BulletExplosionAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BulletExplosionAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BulletFireAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BulletFireAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BulletMovementAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BulletMovementAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/EggAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/EggAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/MiniBossDeathAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/MiniBossDeathAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/MiniBossMovementAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/MiniBossMovementAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/PlaneAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/PlaneAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/PlaneBlinkAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/PlaneBlinkAnimation.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,8 +97,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AP_graphic#2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Program Files/javafx-sdk-18.0.1/lib" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -64,9 +117,11 @@
   </component>
   <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8 (2)" />
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-18" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Application.App" />
       <module name="heay" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$PROJECT_DIR$/../../../../Program Files/javafx-sdk-18.0.1/lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.media" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Application.*" />
@@ -120,11 +175,34 @@
       <workItem from="1652965239783" duration="72925000" />
       <workItem from="1653157720329" duration="43602000" />
       <workItem from="1653252493273" duration="15355000" />
-      <workItem from="1653303449155" duration="2960000" />
+      <workItem from="1653303449155" duration="14193000" />
     </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <created>1653306697575</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1653306697575</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
 </project>
