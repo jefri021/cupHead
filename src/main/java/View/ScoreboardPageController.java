@@ -25,7 +25,7 @@ public class ScoreboardPageController {
         scrollPane.setFitToWidth(true);
 
         ArrayList <User> sorted = new ArrayList<>(Database.getInstance().getUsers());
-        Comparator <User> cmp = Comparator.comparing(User::getScore).thenComparing(User::getUsername);
+        Comparator <User> cmp = Comparator.comparing(User::getScore).reversed().thenComparing(User::getUsername);
         sorted.sort(cmp);
 
         for (User user : sorted) {
@@ -33,7 +33,7 @@ public class ScoreboardPageController {
             hBox.setSpacing(20);
             hBox.setMaxSize(list.getMaxWidth(), 15);
             Label label = new Label();
-            label.setText(user.getUsername() + "\t\t\t" + user.getScore());
+            label.setText(user.getUsername() + "\t\t" + user.getScore());
             if (sorted.indexOf(user) == 0) label.setId("1TextScoreboard");
             else if (sorted.indexOf(user) == 1) label.setId("2TextScoreboard");
             else if (sorted.indexOf(user) == 2) label.setId("3TextScoreboard");

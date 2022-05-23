@@ -18,7 +18,7 @@ public class Boss extends ImageView {
         this.setImage(new Image("/Images/Game/Boss/0.gif"));
         this.setLayoutX(900);
         this.setLayoutY(150);
-        this.health = 10;
+        this.health = 600;
         bossAnimation = new BossAnimation();
         bossAnimation.play();
     }
