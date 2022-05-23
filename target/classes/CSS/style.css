@@ -1,0 +1,207 @@
+@font-face {
+    src: url('/Fonts/Macondo-Regular.ttf');
+}
+
+.registrationBackground {
+    -fx-background-position: top, top;
+    -fx-background-repeat: repeat-x, repeat-x;
+    -fx-background-image: url("/Images/Register/RegisterBG_layer0.png"),
+                            url("/Images/Register/RegisterBG_layer1.png");
+}
+
+.mainMenuBackground {
+    -fx-background-position: top, top, top;
+    -fx-background-repeat: repeat-x, repeat-x, repeat-x;
+    -fx-background-image: url("/Images/MainMenu/RegisterBG_layer0.png"),
+                            url("/Images/MainMenu/MainBG_layer1.png"),
+                            url("/Images/MainMenu/MainBG_layer2.png");
+}
+
+.enterInfoText {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 40;
+    -fx-font-weight: bold;
+}
+
+.userPassText {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+}
+
+.userPassField {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 20;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: rgba(255, 255, 255, 0.45);
+    -fx-border-color: black;
+}
+
+.button {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 17;
+    -fx-background-color: rgba(255, 255, 255, 0.45);
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+}
+
+.button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: rgba(0, 0, 0, 0.42);
+    -fx-text-fill: white;
+}
+
+.logoutButton {
+    -fx-font-size: 20;
+}
+
+.logoutButton:hover {
+    -fx-cursor: hand;
+    -fx-arc-height: 10;
+    -fx-arc-width: 10;
+    -fx-font-weight: bold;
+}
+
+.okButton {
+    -fx-font-size: 17;
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+    -fx-background-color: rgba(255, 255, 255, 0.45);
+    -fx-text-fill: green;
+}
+
+.okButton:hover {
+    -fx-arc-width: 20;
+    -fx-arc-height: 20;
+    -fx-font-weight: bold;
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.deleteButton {
+    -fx-font-size: 23;
+    -fx-border-radius: 4;
+    -fx-border-width: 2;
+    -fx-border-color: black;
+    -fx-background-color: rgba(255, 255, 255, 0.31);
+    -fx-text-fill: red;
+}
+
+.deleteButton:hover {
+    -fx-text-fill: white;
+    -fx-background-color: red;
+}
+
+.scoreboardButton {
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-background-color: white;
+    -fx-border-width: 3;
+    -fx-background-radius: 5;
+}
+
+.scoreboardButton:hover {
+    -fx-text-fill: white;
+    -fx-background-color: black;
+    -fx-cursor: hand;
+}
+
+.message {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 28;
+    -fx-font-weight: bold;
+}
+
+.changeMessage {
+    -fx-font-weight: bold;
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 22;
+}
+
+.profileMenuBackground {
+    -fx-background-position: top, bottom, bottom, bottom;
+    -fx-background-repeat: repeat-x, repeat-x, repeat-x, repeat-x;
+    -fx-background-image: url("/Images/Profile/RegisterBG_layer0.png"),
+    url("/Images/Profile/ProfileBG_layer1.png"),
+    url("/Images/Profile/ProfileBG_layer2.png"),
+    url("/Images/Profile/ProfileBG_layer3.png");
+}
+
+.gameBackground {
+    -fx-background-position: top, top, bottom, bottom, bottom, bottom, bottom, bottom;
+    -fx-background-repeat: repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x;
+    -fx-background-image: url("/Images/Game/layer0.png"),
+    url("/Images/Game/layer1.png"),
+    url("/Images/Game/layer2.png"),
+    url("/Images/Game/layer3.png"),
+    url("/Images/Game/layer4.png"),
+    url("/Images/Game/layer5.png"),
+    url("/Images/Game/layer6.png"),
+    url("/Images/Game/layer7.png");
+}
+
+.avatarMessage {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 19;
+    -fx-font-weight: bold;
+}
+
+.scrollHBox {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-border-color: white;
+    -fx-border-width: 5;
+    -fx-border-radius: 3;
+}
+
+#1TextScoreboard {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 40;
+    -fx-background-color: none;
+    -fx-text-fill: #bba416;
+}
+
+#2TextScoreboard {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 40;
+    -fx-background-color: none;
+    -fx-text-fill: #8d8d8d;
+}
+
+#3TextScoreboard {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 40;
+    -fx-background-color: none;
+    -fx-text-fill: #834a22;
+}
+
+#TextScoreboard {
+    -fx-font-family: 'Macondo';
+    -fx-font-size: 40;
+    -fx-background-color: none;
+    -fx-text-fill: white;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 5em;
+}

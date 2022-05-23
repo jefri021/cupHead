@@ -1,0 +1,30 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<Pane fx:id="background" styleClass="registrationBackground" stylesheets="@../CSS/style.css"
+      xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="View.LoginAndRegistrationPageController" prefWidth="1600" prefHeight="800"
+        onMouseClicked="#eraseMessage">
+    <VBox layoutX="600" layoutY="220" spacing="10" alignment="center" prefWidth="300" maxHeight="700">
+        <Text textAlignment="CENTER" styleClass="enterInfoText" text="Enter Your Information"/>
+
+        <Label text="Username" styleClass="userPassText"/>
+        <TextField fx:id="username" styleClass="userPassField" promptText="Enter username here"/>
+
+        <Label text="Password" styleClass="userPassText"/>
+        <TextField fx:id="password" styleClass="userPassField" promptText="Enter password here"/>
+
+        <HBox alignment="CENTER" spacing="10" maxWidth="250">
+            <Button styleClass="button" text="Login" onMouseClicked="#login"/>
+            <Button styleClass="button" text="Register" onMouseClicked="#register"/>
+        </HBox>
+
+        <Button styleClass="button" text="Guest" onMouseClicked="#playAsGuest"/>
+
+        <Label styleClass="message"/>
+    </VBox>
+</Pane>

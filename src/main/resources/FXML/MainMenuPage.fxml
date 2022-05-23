@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<Pane fx:id="background" styleClass="mainMenuBackground" stylesheets="@../CSS/style.css" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuPageController">
+
+    <VBox alignment="CENTER" spacing="10" layoutX="570" layoutY="35" maxWidth="460" maxHeight="260">
+        <ImageView layoutX="570" layoutY="35" fitWidth="460" fitHeight="260" onMouseClicked="#startGame">
+            <Image url="@../Images/MainMenu/EnterGame.png"/>
+        </ImageView>
+        <Label text="Start New Game" styleClass="enterInfoText"/>
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="-20" layoutX="570" layoutY="410" maxWidth="220" maxHeight="220">
+        <ImageView layoutX="570" layoutY="700" fitWidth="220" fitHeight="220" onMouseClicked="#profile">
+            <Image url="@../Images/profile.gif"/>
+        </ImageView>
+        <Label text="Profile" styleClass="enterInfoText" onMouseClicked="#profile"/>
+    </VBox>
+
+    <VBox alignment="CENTER" layoutX="800" layoutY="410" maxWidth="220" spacing="10">
+        <ImageView layoutX="800" layoutY="410" fitHeight="190" fitWidth="190" onMouseClicked="#scoreBoard">
+            <Image url="@../Images/MainMenu/scoreboard.png"/>
+        </ImageView>
+        <Label text="ScoreBoard" styleClass="enterInfoText" onMouseClicked="#scoreBoard"/>
+    </VBox>
+
+</Pane>

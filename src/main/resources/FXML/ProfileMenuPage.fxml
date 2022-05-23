@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.image.ImageView?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="View.ProfileMenuPageController"
+      prefHeight="800.0" prefWidth="1600.0"
+      fx:id="background" stylesheets="@../CSS/style.css" styleClass="profileMenuBackground" onMouseClicked="#eraseTexts">
+    <VBox layoutX="60" layoutY="60" prefWidth="300" prefHeight="700" spacing="15">
+        <Label text="Change Username:" styleClass="userPassText"/>
+        <TextField prefWidth="50" promptText="Enter New Username" styleClass="userPassField"/>
+        <Label styleClass="changeMessage"/>
+
+        <Line/>
+        <Line/>
+
+        <Label text="Change Password:" styleClass="userPassText"/>
+        <TextField prefWidth="50" promptText="Enter New Password" styleClass="userPassField"/>
+        <Label styleClass="changeMessage"/>
+    </VBox>
+
+    <VBox layoutX="390" layoutY="115" spacing="155">
+        <Button text="Change" styleClass="button" onMouseClicked="#changeUsername"/>
+        <Button text="Change" styleClass="button" onMouseClicked="#changePassword"/>
+    </VBox>
+
+    <VBox maxWidth="200" layoutX="700" layoutY="100" spacing="15">
+        <ImageView fx:id="avatarIMG" fitWidth="220" fitHeight="220">
+        </ImageView>
+        <HBox alignment="CENTER" spacing="10">
+            <Button text="Next" styleClass="button" onMouseClicked="#nextAvatar"/>
+            <Button text="OK" styleClass="okButton" onMouseClicked="#changeAvatar"/>
+        </HBox>
+        <Label alignment="CENTER" fx:id="avatarLabel" styleClass="avatarMessage"/>
+    </VBox>
+
+    <VBox alignment="CENTER" layoutX="1400" layoutY="60" prefWidth="200" spacing="15">
+        <Button text="LOGOUT" alignment="CENTER" styleClass="logoutButton" onMouseClicked="#logout"/>
+        <Button text="Back" alignment="CENTER" styleClass="button" onMouseClicked="#backToMainMenu"/>
+
+        <Line/>
+        <Line/>
+        <Button text="Delete" alignment="CENTER" styleClass="deleteButton" onMouseClicked="#delete"/>
+    </VBox>
+</Pane>

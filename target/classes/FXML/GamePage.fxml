@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<Pane stylesheets="@../CSS/style.css" styleClass="gameBackground" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="View.GamePageController"
+      prefHeight="800.0" prefWidth="1600.0"
+      fx:id="background">
+
+</Pane>

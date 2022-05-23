@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import java.net.URL?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="View.ScoreboardPageController"
+      prefHeight="800.0" prefWidth="1600.0"
+      fx:id="background">
+    <ImageView layoutY="-45" fitWidth="1600" fitHeight="900">
+        <Image url="@../Images/Scoreboard/scoreboardBackground.jpg"/>
+    </ImageView>
+
+    <ScrollPane prefWidth="390" prefHeight="400" layoutX="605" layoutY="140">
+        <VBox fx:id="list" prefWidth="390" prefHeight="400"/>
+    </ScrollPane>
+
+    <Button styleClass="scoreboardButton" text="Back" layoutX="748" layoutY="700" onMouseClicked="#returnMenu"/>
+
+    <stylesheets>
+        <URL value="@../CSS/style.css"/>
+    </stylesheets>
+</Pane>
