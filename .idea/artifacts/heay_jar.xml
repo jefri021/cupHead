@@ -3,10 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/heay_jar</output-path>
     <root id="archive" name="heay.jar">
       <element id="module-output" name="heay" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/18.0.1/javafx-controls-18.0.1-win.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/15/javafx-base-15.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/15/javafx-graphics-15-win.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/15/javafx-base-15-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Program Files/javafx-sdk-18.0.1/lib/javafx-swt.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Program Files/javafx-sdk-18.0.1/lib/javafx.web.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Program Files/javafx-sdk-18.0.1/lib/javafx.base.jar" path-in-jar="/" />
@@ -16,11 +12,15 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Program Files/javafx-sdk-18.0.1/lib/javafx.controls.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Program Files/javafx-sdk-18.0.1/lib/javafx.graphics.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/18.0.1/javafx-fxml-18.0.1-win.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/15/javafx-graphics-15.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-media/15/javafx-media-15-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.9.0/gson-2.9.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/15/javafx-base-15-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/18.0.1/javafx-controls-18.0.1-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/18.0.1/javafx-controls-18.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/15/javafx-graphics-15-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-media/15/javafx-media-15-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/18.0.1/javafx-fxml-18.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/15/javafx-base-15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/15/javafx-graphics-15.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

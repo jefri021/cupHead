@@ -10,23 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44b7bb02-c83e-4cb8-9f23-027629945501" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/heay_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/heay_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/heay_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UsersList.json" beforeDir="false" afterPath="$PROJECT_DIR$/UsersList.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginAndRegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginAndRegistrationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Boss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Bullet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/GamePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/GamePageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Transitions/BulletFireAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Transitions/BulletFireAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Application/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Application/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Boss.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Boss.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Bullet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Plane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Plane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/LoginAndRegistrationPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/LoginAndRegistrationPageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BulletFireAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BulletFireAnimation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/PlaneBlinkAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/PlaneBlinkAnimation.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +133,9 @@
       <workItem from="1653157720329" duration="43602000" />
       <workItem from="1653252493273" duration="15355000" />
       <workItem from="1653303449155" duration="15333000" />
-      <workItem from="1653365296037" duration="19976000" />
+      <workItem from="1653365296037" duration="20294000" />
+      <workItem from="1653398005360" duration="103000" />
+      <workItem from="1653398933668" duration="1152000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1653306697575</created>

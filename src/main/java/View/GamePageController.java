@@ -47,12 +47,21 @@ public class GamePageController implements DefaultAnimation {
     private int totalMiniBossKill;
     private boolean isGrayscale;
     private ProgressBar bossHealth;
-    private MediaPlayer mainTheme;
+    private MediaPlayer mainThemePlayer;
+
+    private Media[] audios;
 
     private void initEverything() {
-        Media media = new Media(this.getClass().getResource("/Audios/Game/main_theme.mp3").toString());
-        mainTheme = new MediaPlayer(media);
-        mainTheme.play();
+        Media mainTheme = new Media(this.getClass().getResource("/Audios/Game/main_theme.mp3").toString());
+        mainThemePlayer = new MediaPlayer(mainTheme);
+        mainThemePlayer.play();
+
+        audios = new Media[9];
+        for (int i = 0; i < 5; i++)
+            audios[i] = new Media(this.getClass().getResource("/Audios/Game/spit" + i + ".wav").toString());
+        for (int i = 5; i < 9; i++)
+            audios[i] = new Media(this.getClass().getResource("/Audios/Game/egg" + (i - 5) + ".wav").toString());
+
         random = new Random(0);
         spacePressed = leftPressed = rightPressed = downPressed = upPressed = false;
         ammo = AmmoType.BULLET;
@@ -131,7 +140,8 @@ public class GamePageController implements DefaultAnimation {
 
         if (decision.equals("TAB") && status) isGrayscale = !isGrayscale;
 
-        if (decision.equals("M") && status) mainTheme.setMute(!mainTheme.isMute());
+        if (decision.equals("M") && status)
+            mainThemePlayer.setMute(!mainThemePlayer.isMute());
     }
 
     private void fireAmmo() {
@@ -194,6 +204,10 @@ public class GamePageController implements DefaultAnimation {
             if (!(child instanceof Egg)) continue;
             if (child.intersects(Game.getPlane().getBoundsInParent()) && Game.getPlane().getOpacity() == 1) {
                 Game.getPlane().hitEgg();
+                if (! mainThemePlayer.isMute()) {
+                    MediaPlayer mediaPlayer = new MediaPlayer(audios[random.nextInt(4) + 5]);
+                    mediaPlayer.play();
+                }
                 background.getChildren().remove(child);
                 i--;
             }
@@ -257,6 +271,11 @@ public class GamePageController implements DefaultAnimation {
             BossEggAttackAnimation animation = new BossEggAttackAnimation(background);
 
             animation.play();
+
+            if (! mainThemePlayer.isMute()) {
+                MediaPlayer mediaPlayer = new MediaPlayer(audios[random.nextInt(5)]);
+                mediaPlayer.play();
+            }
         }
     }
 
@@ -336,7 +355,7 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private void endGame() {
-        mainTheme.stop();
+        mainThemePlayer.stop();
         timeLine.stop();
         if (Game.getPlayer() == null) {
             App.changePage("LoginAndRegistrationPage");
