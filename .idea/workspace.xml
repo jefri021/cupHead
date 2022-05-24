@@ -9,10 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b7bb02-c83e-4cb8-9f23-027629945501" name="Changes" comment="commit">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/heay_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/heay_jar.xml" afterDir="false" />
+    <list default="true" id="44b7bb02-c83e-4cb8-9f23-027629945501" name="Changes" comment="audios added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Plane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/GamePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/GamePageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainMenuPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainMenuPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Game/gameOver.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/GamePageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/GamePageController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +138,7 @@
       <workItem from="1653303449155" duration="15333000" />
       <workItem from="1653365296037" duration="20294000" />
       <workItem from="1653398005360" duration="103000" />
-      <workItem from="1653398933668" duration="1152000" />
+      <workItem from="1653398933668" duration="6068000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1653306697575</created>
@@ -165,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653375821431</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="audios added">
+      <created>1653400373429</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1653400373429</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +197,7 @@
     <MESSAGE value="second commit" />
     <MESSAGE value="third" />
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="audios added" />
+    <option name="LAST_COMMIT_MESSAGE" value="audios added" />
   </component>
 </project>

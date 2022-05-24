@@ -46,9 +46,10 @@ public class GamePageController implements DefaultAnimation {
     private long startTime;
     private int totalMiniBossKill;
     private boolean isGrayscale;
-    private ProgressBar bossHealth;
-    private MediaPlayer mainThemePlayer;
+    private ProgressBar bossHealthBar;
+    private Label bossHealthLabel;
 
+    private MediaPlayer mainThemePlayer;
     private Media[] audios;
 
     private void initEverything() {
@@ -78,15 +79,22 @@ public class GamePageController implements DefaultAnimation {
         ammoIcon.setY(715);
         background.getChildren().add(ammoIcon);
 
-        bossHealth = new ProgressBar();
-        bossHealth.setLayoutX(550);
-        bossHealth.setLayoutY(10);
-        bossHealth.setPrefWidth(500);
-        bossHealth.setProgress(1);
-        bossHealth.setStyle("-fx-accent: #9a0808;");
+        bossHealthBar = new ProgressBar();
+        bossHealthBar.setLayoutX(550);
+        bossHealthBar.setLayoutY(10);
+        bossHealthBar.setPrefWidth(500);
+        bossHealthBar.setProgress(1);
+        bossHealthBar.setStyle("-fx-accent: #d00000;");
 
-        background.getChildren().add(bossHealth);
+        bossHealthLabel = new Label();
+        bossHealthLabel.setLayoutX(780);
+        bossHealthLabel.setLayoutY(3);
+        bossHealthLabel.setStyle("-fx-font-family: 'Macondo'; -fx-font-weight: bold; -fx-font-size: 25; -fx-text-fill: black;");
+        bossHealthLabel.setText("600");
+
+        background.getChildren().add(bossHealthBar);
         background.getChildren().add(Game.getPlane().getHealthBar());
+        background.getChildren().add(bossHealthLabel);
 
         timeLabel = new Label();
         background.getChildren().add(timeLabel);
@@ -181,6 +189,10 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private void handleCollisions() {
+
+        if (Game.getPlane().intersects(Game.getBoss().getBoundsInParent()) && Game.getPlane().getOpacity() == 1)
+            Game.getPlane().hit("boss");
+
         for (int i = 0; i < Game.getAllBombs().size(); i++)
             if (bombIntersectsBoss(Game.getAllBombs().get(i), Game.getBoss())) {
                 Game.getBoss().getBombed();
@@ -203,7 +215,7 @@ public class GamePageController implements DefaultAnimation {
             Node child = background.getChildren().get(i);
             if (!(child instanceof Egg)) continue;
             if (child.intersects(Game.getPlane().getBoundsInParent()) && Game.getPlane().getOpacity() == 1) {
-                Game.getPlane().hitEgg();
+                Game.getPlane().hit("egg");
                 if (! mainThemePlayer.isMute()) {
                     MediaPlayer mediaPlayer = new MediaPlayer(audios[random.nextInt(4) + 5]);
                     mediaPlayer.play();
@@ -233,7 +245,7 @@ public class GamePageController implements DefaultAnimation {
             if (Game.getAllMiniBosses().get(i).intersects(Game.getPlane().getBoundsInParent()) &&
                 Game.getPlane().getOpacity() == 1) {
                 Game.getAllMiniBosses().get(i).hit(background, true);
-                Game.getPlane().hitMiniBoss();
+                Game.getPlane().hit("miniBoss");
                 i--;
             }
 
@@ -254,7 +266,8 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private void updateHealthBar() {
-        bossHealth.setProgress(Game.getBoss().getHealth() / 600);
+        bossHealthBar.setProgress(Game.getBoss().getHealth() / 600);
+        bossHealthLabel.setText(""+(int)Game.getBoss().getHealth());
     }
 
     private void changeBossStatus() {
@@ -371,7 +384,9 @@ public class GamePageController implements DefaultAnimation {
         colorAdjust.setBrightness(-0.5);
         background.setEffect(colorAdjust);
 
-        ImageView quoteCard = new ImageView(new Image("/Images/Game/gameOver.png"));
+        ImageView quoteCard;
+        if (Game.getBoss().getHealth() <= 0) quoteCard = new ImageView(new Image("/Images/Game/win.png"));
+        else quoteCard = new ImageView(new Image("/Images/Game/lose.png"));
         quoteCard.setX(550);
         quoteCard.setY(100);
         quoteCard.setFitWidth(500);

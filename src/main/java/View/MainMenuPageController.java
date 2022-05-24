@@ -11,14 +11,20 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class MainMenuPageController implements DefaultAnimation {
     public Pane background;
     private Timeline timeline;
+    private MediaPlayer mainTheme;
 
     public void initialize() {
+        Media media = new Media(this.getClass().getResource("/Audios/opening.mp3").toString());
+        mainTheme = new MediaPlayer(media);
+        mainTheme.play();
         startGameInit();
         initCustomButton((VBox)background.getChildren().get(1));
         initCustomButton((VBox)background.getChildren().get(2));
@@ -90,16 +96,19 @@ public class MainMenuPageController implements DefaultAnimation {
 
     public void startGame() {
         Game.startNewGame(Database.getInstance().getLoggedInUser());
+        mainTheme.stop();
         timeline.stop();
         App.changePage("GamePage");
     }
 
     public void profile() {
+        mainTheme.stop();
         timeline.stop();
         App.changePage("ProfileMenuPage");
     }
 
     public void scoreBoard() {
+        mainTheme.stop();
         timeline.stop();
         App.changePage("ScoreboardPage");
     }

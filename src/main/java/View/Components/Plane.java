@@ -50,15 +50,13 @@ public class Plane extends ImageView {
         }
     }
 
-    public void hitEgg() {
-        health -= 10;
+    public void hit (String obj) {
+        if (obj.equals("egg")) health -= 10;
+        if (obj.equals("miniBoss")) health -= 5;
+        if (obj.equals("boss")) health -= 20;
         healthBar.setProgress(health / 50);
-        new PlaneBlinkAnimation().play();
-    }
-
-    public void hitMiniBoss() {
-        health -= 5;
-        healthBar.setProgress(health / 50);
+        if (health < 20) healthBar.setStyle("-fx-accent: #ce0303");
+        else if (health < 30) healthBar.setStyle("-fx-accent: #ff8000;");
         new PlaneBlinkAnimation().play();
     }
 
