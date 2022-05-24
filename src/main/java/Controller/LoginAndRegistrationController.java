@@ -2,10 +2,6 @@ package Controller;
 
 import Model.Database;
 import Model.User;
-import com.google.gson.Gson;
-
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class LoginAndRegistrationController {
 
@@ -45,8 +41,6 @@ public class LoginAndRegistrationController {
 
     public static boolean loggedInSuccessfully (String username, String password) {
         Database database = Database.getInstance();
-        System.out.println("database = " + (database != null));
-        System.out.println("users = " + (database.getUsers() != null));
         for (User user : database.getUsers())
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 database.setLoggedInUser(user);

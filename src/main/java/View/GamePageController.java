@@ -18,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -45,8 +47,12 @@ public class GamePageController implements DefaultAnimation {
     private int totalMiniBossKill;
     private boolean isGrayscale;
     private ProgressBar bossHealth;
+    private MediaPlayer mainTheme;
 
     private void initEverything() {
+        Media media = new Media(this.getClass().getResource("/Audios/Game/main_theme.mp3").toString());
+        mainTheme = new MediaPlayer(media);
+        mainTheme.play();
         random = new Random(0);
         spacePressed = leftPressed = rightPressed = downPressed = upPressed = false;
         ammo = AmmoType.BULLET;
@@ -82,11 +88,9 @@ public class GamePageController implements DefaultAnimation {
     public void initialize() {
         initEverything();
 
-        background.getChildren().get(0).setOnKeyPressed(event -> setBooleans(event.getCode().toString(), true));
+        background.getChildren().get(0).setOnKeyPressed(event -> handleKeyEvents(event.getCode().toString(), true));
 
-        background.getChildren().get(0).setOnKeyReleased(event -> setBooleans(event.getCode().toString(), false));
-
-        background.setOnMouseClicked(event -> System.out.println("x = " + event.getSceneX() + ", y = " + event.getSceneY()));
+        background.getChildren().get(0).setOnKeyReleased(event -> handleKeyEvents(event.getCode().toString(), false));
 
         timeLine = App.getTimeLine(background, this);
         timeLine.play();
@@ -105,7 +109,8 @@ public class GamePageController implements DefaultAnimation {
         }
     }
 
-    private void setBooleans (String decision, boolean status) {
+    private void handleKeyEvents (String decision, boolean status) {
+
         if (decision.equals("SHIFT") && status) {
             if (ammo.equals(AmmoType.BOMB)) ammo = AmmoType.BULLET;
             else ammo = AmmoType.BOMB;
@@ -125,6 +130,8 @@ public class GamePageController implements DefaultAnimation {
         if (decision.equals("SPACE")) spacePressed = status;
 
         if (decision.equals("TAB") && status) isGrayscale = !isGrayscale;
+
+        if (decision.equals("M") && status) mainTheme.setMute(!mainTheme.isMute());
     }
 
     private void fireAmmo() {
@@ -191,7 +198,6 @@ public class GamePageController implements DefaultAnimation {
                 i--;
             }
             else if (((Egg) child).getX() < -50) {
-                System.out.println("egg x = " + ((Egg) child).getX());
                 background.getChildren().remove(child);
                 i--;
             }
@@ -330,6 +336,7 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private void endGame() {
+        mainTheme.stop();
         timeLine.stop();
         if (Game.getPlayer() == null) {
             App.changePage("LoginAndRegistrationPage");

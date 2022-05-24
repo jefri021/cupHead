@@ -16,16 +16,17 @@ public class Bullet extends ImageView {
         this.setX(this.getX() + dx);
     }
 
+    BulletFireAnimation fireAnimation;
     BulletMovementAnimation movementAnimation;
 
     public void fire (Pane parent) {
-        BulletFireAnimation animation = new BulletFireAnimation(this);
-        animation.play();
-        animation.setOnFinished(event -> {
+        fireAnimation = new BulletFireAnimation(this);
+        fireAnimation.play();
+        fireAnimation.setOnFinished(event -> {
             ObservableList <Node> children = Bullet.this.getParent().getChildrenUnmodifiable();
+            Bullet.this.setImage(new Image("/Images/Game/Bullet/Travel/0.png"));
             Bullet.this.setFitWidth(72);
             Bullet.this.setFitHeight(15);
-            Bullet.this.setImage(new Image("/Images/Game/Bullet/Travel/0.png"));
             double planeX = ((ImageView)(children.get(children.indexOf(Game.getPlane())))).getX(),
                     planeY = ((ImageView)(children.get(children.indexOf(Game.getPlane())))).getY();
             Bullet.this.setX(planeX + 90);
@@ -40,6 +41,7 @@ public class Bullet extends ImageView {
     }
 
     public void explode (Pane parent) {
+        if (fireAnimation != null) fireAnimation.stop();
         if (movementAnimation != null) movementAnimation.stop();
         BulletExplosionAnimation animation = new BulletExplosionAnimation(this);
         animation.play();

@@ -33,6 +33,5 @@ public class Boss extends ImageView {
 
     public void getBombed() {
         this.health -= 10;
-        System.out.println("lol bombed");
     }
 }

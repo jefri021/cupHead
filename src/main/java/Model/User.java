@@ -26,7 +26,6 @@ public class User {
     }
 
     public void changeAvatar (int avatarPicNumber) {
-        System.out.println("avatar num = " + avatarPicNumber);
         this.avatarPicNumber = avatarPicNumber;
         App.writeDataToJson();
     }

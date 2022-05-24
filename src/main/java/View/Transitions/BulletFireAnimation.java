@@ -4,8 +4,6 @@ import Model.Game;
 import View.Components.Bullet;
 import javafx.animation.Transition;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
