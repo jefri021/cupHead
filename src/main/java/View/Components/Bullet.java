@@ -23,7 +23,6 @@ public class Bullet extends ImageView {
         animation.play();
         animation.setOnFinished(event -> {
             ObservableList <Node> children = Bullet.this.getParent().getChildrenUnmodifiable();
-
             Bullet.this.setFitWidth(72);
             Bullet.this.setFitHeight(15);
             Bullet.this.setImage(new Image("/Images/Game/Bullet/Travel/0.png"));

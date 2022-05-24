@@ -2,6 +2,7 @@ package View;
 
 import Application.App;
 import Controller.LoginAndRegistrationController;
+import Model.Game;
 import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
@@ -33,7 +34,8 @@ public class LoginAndRegistrationPageController implements DefaultAnimation {
     }
 
     public void playAsGuest() {
-
+        Game.startNewGame(null);
+        App.changePage("GamePage");
     }
 
     public void initialize() {

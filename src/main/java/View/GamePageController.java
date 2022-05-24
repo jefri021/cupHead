@@ -11,6 +11,8 @@ import View.Transitions.*;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -39,16 +41,16 @@ public class GamePageController implements DefaultAnimation {
     private AmmoType ammo;
     private Label timeLabel;
 
-    private Rectangle bossHealth;
     private long startTime;
     private int totalMiniBossKill;
+    private boolean isGrayscale;
+    private ProgressBar bossHealth;
 
     private void initEverything() {
         random = new Random(0);
         spacePressed = leftPressed = rightPressed = downPressed = upPressed = false;
         ammo = AmmoType.BULLET;
         timeLabel = new Label();
-        bossHealth = new Rectangle();
         startTime = Clock.systemUTC().millis();
         totalMiniBossKill = 0;
         background.getChildren().add(Game.getPlane());
@@ -61,27 +63,20 @@ public class GamePageController implements DefaultAnimation {
         ammoIcon.setY(715);
         background.getChildren().add(ammoIcon);
 
-        Region bossHealthBar = new Region();
-        bossHealthBar.setLayoutX(550);
-        bossHealthBar.setLayoutY(5);
-        bossHealthBar.setPrefWidth(500);
-        bossHealthBar.setPrefHeight(25);
-        bossHealthBar.setStyle("-fx-border-radius: 5; -fx-border-width: 3; -fx-border-color: white; -fx-fill: none;");
-        background.getChildren().add(bossHealthBar);
+        bossHealth = new ProgressBar();
+        bossHealth.setLayoutX(550);
+        bossHealth.setLayoutY(10);
+        bossHealth.setPrefWidth(500);
+        bossHealth.setProgress(1);
+        bossHealth.setStyle("-fx-accent: #9a0808;");
 
-        bossHealth = new Rectangle();
-        bossHealth.setX(552);
-        bossHealth.setY(7.5);
-        bossHealth.setWidth(495);
-        bossHealth.setHeight(20);
-        bossHealth.setArcWidth(10);
-        bossHealth.setArcHeight(10);
-        bossHealth.setFill(Color.rgb(214, 44, 71, 1));
         background.getChildren().add(bossHealth);
+        background.getChildren().add(Game.getPlane().getHealthBar());
 
         timeLabel = new Label();
         background.getChildren().add(timeLabel);
 
+        isGrayscale = false;
     }
 
     public void initialize() {
@@ -128,6 +123,8 @@ public class GamePageController implements DefaultAnimation {
         if (decision.equals("LEFT") || decision.equals("A")) leftPressed = status;
         if (decision.equals("RIGHT") || decision.equals("D")) rightPressed = status;
         if (decision.equals("SPACE")) spacePressed = status;
+
+        if (decision.equals("TAB") && status) isGrayscale = !isGrayscale;
     }
 
     private void fireAmmo() {
@@ -147,6 +144,7 @@ public class GamePageController implements DefaultAnimation {
 
     private void spawnMiniBossLine() {
         int startingY = (int)(Math.random() * (600));
+        if (Game.getPlane().getY() < 290 || Game.getPlane().getY() > 500) startingY = (int)Game.getPlane().getY();
         for (int i = 0; i < 5; i++) {
             MiniBoss miniBoss = new MiniBoss(1700 + 200 * i, startingY, random.nextBoolean());
             background.getChildren().add(miniBoss);
@@ -184,12 +182,18 @@ public class GamePageController implements DefaultAnimation {
                 i--;
             }
 
-        for (Node child : background.getChildren()) {
+        for (int i = 0; i < background.getChildren().size(); i++) {
+            Node child = background.getChildren().get(i);
             if (!(child instanceof Egg)) continue;
-            if (child.intersects(Game.getPlane().getBoundsInParent())) {
+            if (child.intersects(Game.getPlane().getBoundsInParent()) && Game.getPlane().getOpacity() == 1) {
                 Game.getPlane().hitEgg();
-                background.getChildren().removeIf(node -> node instanceof Egg);
-                break;
+                background.getChildren().remove(child);
+                i--;
+            }
+            else if (((Egg) child).getX() < -50) {
+                System.out.println("egg x = " + ((Egg) child).getX());
+                background.getChildren().remove(child);
+                i--;
             }
         }
 
@@ -206,7 +210,8 @@ public class GamePageController implements DefaultAnimation {
         }
 
         for (int i = 0; i < Game.getAllMiniBosses().size(); i++)
-            if (Game.getAllMiniBosses().get(i).intersects(Game.getPlane().getBoundsInParent())) {
+            if (Game.getAllMiniBosses().get(i).intersects(Game.getPlane().getBoundsInParent()) &&
+                Game.getPlane().getOpacity() == 1) {
                 Game.getAllMiniBosses().get(i).hit(background, true);
                 Game.getPlane().hitMiniBoss();
                 i--;
@@ -229,7 +234,7 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private void updateHealthBar() {
-        bossHealth.setWidth(Game.getBoss().getHealth() * 0.833 - 5);
+        bossHealth.setProgress(Game.getBoss().getHealth() / 600);
     }
 
     private void changeBossStatus() {
@@ -240,7 +245,7 @@ public class GamePageController implements DefaultAnimation {
             animation.setOnFinished(event -> endGame());
             timeLine.stop();
         }
-        else if (Game.getBoss().getHealth() % 20 == 0 && random.nextBoolean()) {
+        else if (Game.getBoss().getHealth() % 10 == 0 && Game.getPlane().getY() > 200 && Game.getPlane().getY() < 600) {
             Game.getBoss().getBossAnimation().stop();
 
             BossEggAttackAnimation animation = new BossEggAttackAnimation(background);
@@ -257,6 +262,7 @@ public class GamePageController implements DefaultAnimation {
         timeLabel.setLayoutY(680);
         timeLabel.setStyle("-fx-font-family: 'Macondo'; -fx-font-size: 35; -fx-font-weight: bold;");
 
+        handleGrayscale();
 
         managePlane();
 
@@ -275,6 +281,19 @@ public class GamePageController implements DefaultAnimation {
                 "left " + xPosition * 4 * 3 + "px bottom," +
                 "left " + xPosition * 4.5 * 3 + "px bottom;";
         pane.setStyle(style);
+    }
+
+    private void handleGrayscale() {
+        double saturation = 0;
+        double brightness = 0;
+        if (isGrayscale) {
+            saturation = -1;
+            brightness = -0.2;
+        }
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setSaturation(saturation);
+        colorAdjust.setBrightness(brightness);
+        background.setEffect(colorAdjust);
     }
 
     private boolean bulletIntersectsBoss(ImageView bullet, ImageView boss) {
@@ -311,12 +330,54 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private void endGame() {
+        timeLine.stop();
+        if (Game.getPlayer() == null) {
+            App.changePage("LoginAndRegistrationPage");
+            return;
+        }
+
         int score = 0, time = (int)(Clock.systemUTC().millis() - startTime) / 1000;
         if (Game.getBoss().getHealth() <= 0 && time < 120) score = (int)(1.1 * (120 - time));
         score += totalMiniBossKill;
         Game.getPlayer().updateScore(score);
-        timeLine.stop();
-        App.changePage("MainMenuPage");
+
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(-0.5);
+        background.setEffect(colorAdjust);
+
+        ImageView quoteCard = new ImageView(new Image("/Images/Game/gameOver.png"));
+        quoteCard.setX(550);
+        quoteCard.setY(100);
+        quoteCard.setFitWidth(500);
+        quoteCard.setFitHeight(680);
+        Rectangle clip = new Rectangle();
+        clip.setX(quoteCard.getX());
+        clip.setY(quoteCard.getY());
+        clip.setWidth(quoteCard.getFitWidth());
+        clip.setHeight(quoteCard.getFitHeight());
+        clip.setArcWidth(40);
+        clip.setArcHeight(40);
+        quoteCard.setClip(clip);
+        background.getChildren().add(quoteCard);
+
+        ImageView planeProgress = new ImageView(new Image("/Images/Game/Plane/0.gif"));
+        planeProgress.setFitHeight(56);
+        planeProgress.setFitWidth(64);
+        planeProgress.setX(-0.662 * Game.getBoss().getHealth() + 970);
+        planeProgress.setY(470);
+        background.getChildren().add(planeProgress);
+
+        background.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getSceneX() > 753 && mouseEvent.getSceneX() < 846 &&
+                mouseEvent.getSceneY() > 568 && mouseEvent.getSceneY() < 591) {
+                Game.startNewGame(Game.getPlayer());
+                App.changePage("GamePage");
+            }
+            if (mouseEvent.getSceneX() > 709 && mouseEvent.getSceneX() < 886 &&
+                    mouseEvent.getSceneY() > 656 && mouseEvent.getSceneY() < 679) {
+                App.changePage("MainMenuPage");
+            }
+        });
     }
 
 }

@@ -48,7 +48,6 @@ public class App extends Application {
         Scene scene = new Scene(pane);
         App.scene = scene;
         stage.setScene(scene);
-        stage.setFullScreen(true);
         stage.setResizable(false);
         stage.setTitle("CupHead");
         stage.getIcons().add(new Image("Images/icon.png"));
