@@ -10,34 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44b7bb02-c83e-4cb8-9f23-027629945501" name="Changes" comment="audios added">
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/Audios.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Bomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Egg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Egg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/MiniBoss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/MiniBoss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Components/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Components/Boss.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/GamePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/GamePageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/LoginAndRegistrationPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/LoginAndRegistrationPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/MainMenuPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/MainMenuPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Transitions/BossAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Transitions/BossAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Transitions/BossBarfAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Transitions/BossBarfAnimation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Transitions/BossDeathAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Transitions/BossDeathAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Transitions/MiniBossMovementAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Transitions/MiniBossMovementAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Transitions/PlaneAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Transitions/PlaneAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Transitions/PlaneBlinkAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Transitions/PlaneBlinkAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Bullet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/Egg.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/Egg.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Components/MiniBoss.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Components/MiniBoss.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/GamePageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/GamePageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Images.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Images.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/MainMenuPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/MainMenuPageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BossAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BossAnimation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BossBarfAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BossBarfAnimation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/BossDeathAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/BossDeathAnimation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/MiniBossMovementAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/MiniBossMovementAnimation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/Transitions/PlaneAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/Transitions/PlaneAnimation.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +139,8 @@
       <workItem from="1653398005360" duration="103000" />
       <workItem from="1653398933668" duration="6692000" />
       <workItem from="1653494762735" duration="2033000" />
-      <workItem from="1653546143339" duration="20946000" />
+      <workItem from="1653546143339" duration="21002000" />
+      <workItem from="1653576826616" duration="1842000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1653306697575</created>

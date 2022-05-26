@@ -265,13 +265,7 @@ public class GamePageController implements DefaultAnimation {
 
     private void changeBossStatus() {
         if (Game.getInstance().getBoss().getHealth() <= 0) {
-            Game.getInstance().getBoss().getBossAnimation().stop();
-            BossDeathAnimation animation = new BossDeathAnimation();
-            animation.play();
-            animation.setOnFinished(event -> endGame());
-            timeLine.stop();
-            timeLine.getKeyFrames().clear();
-            timeLine = null;
+            endGame();
         }
         else if (Game.getInstance().getBoss().getHealth() % ((int)(Game.getInstance().getBoss().getHealth() / 20) + 10) == 0) {
             Game.getInstance().getBoss().getBossAnimation().stop();
@@ -366,8 +360,15 @@ public class GamePageController implements DefaultAnimation {
 
     private void endGame() {
         timeLine.stop();
-        timeLine.getKeyFrames().clear();
         mainThemePlayer.stop();
+        if (Game.getInstance().getBoss().getHealth() <= 0) {
+            Audios.BOSS_DEATH.getAudioClip().play();
+            bossHealthLabel.setText("");
+            Game.getInstance().getBoss().getBossAnimation().stop();
+            BossDeathAnimation animation = new BossDeathAnimation();
+            animation.play();
+            animation.setOnFinished(event -> Game.getInstance().getBoss().setOpacity(0));
+        }
         Game.getInstance().getBoss().getBossAnimation().stop();
 
         if (Game.getInstance().getPlayer() == null) {
@@ -386,7 +387,9 @@ public class GamePageController implements DefaultAnimation {
         background.setEffect(colorAdjust);
 
         ImageView quoteCard;
-        if (Game.getInstance().getBoss().getHealth() <= 0) quoteCard = new ImageView(new Image("/Images/Game/win.png"));
+        if (Game.getInstance().getBoss().getHealth() <= 0) {
+            quoteCard = new ImageView(new Image("/Images/Game/win.png"));
+        }
         else {
             quoteCard = new ImageView(new Image("/Images/Game/lose.png"));
             Audios.LOSE.getAudioClip().play();
