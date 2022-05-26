@@ -2,10 +2,12 @@ package View.Components;
 
 import Model.Game;
 import View.Images;
+import View.Audios;
 import View.Transitions.MiniBossDeathAnimation;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
+import java.util.Random;
 
 
 public class MiniBoss extends ImageView {
@@ -25,11 +27,13 @@ public class MiniBoss extends ImageView {
         this.HP = 3;
     }
 
-    public void hit (Pane parent, boolean isTerminal) {
+    public void hit (Pane parent, boolean isTerminal, boolean isMute) {
         if (isTerminal) HP = 0;
         else HP--;
         if (HP > 0) return;
-        Game.getAllMiniBosses().remove(MiniBoss.this);
+        Game.getInstance().getAllMiniBosses().remove(MiniBoss.this);
+        if (this.getX() > -10 && !isMute)
+            Audios.valueOf("MINI_BOSS_DEATH_" + new Random().nextInt(4)).getAudioClip().play();
         MiniBossDeathAnimation animation = new MiniBossDeathAnimation(this);
         animation.play();
         animation.setOnFinished(event -> parent.getChildren().remove(MiniBoss.this));

@@ -49,18 +49,13 @@ public class GamePageController implements DefaultAnimation {
     private Label bossHealthLabel;
 
     private MediaPlayer mainThemePlayer;
-    private Media[] audios;
 
     private void initEverything() {
+        Game.setInstance(null);
         Media mainTheme = new Media(this.getClass().getResource("/Audios/Game/main_theme.mp3").toString());
         mainThemePlayer = new MediaPlayer(mainTheme);
+        mainThemePlayer.setCycleCount(-1);
         mainThemePlayer.play();
-
-        audios = new Media[9];
-        for (int i = 0; i < 5; i++)
-            audios[i] = new Media(this.getClass().getResource("/Audios/Game/spit" + i + ".wav").toString());
-        for (int i = 5; i < 9; i++)
-            audios[i] = new Media(this.getClass().getResource("/Audios/Game/egg" + (i - 5) + ".wav").toString());
 
         random = new Random(0);
         spacePressed = leftPressed = rightPressed = downPressed = upPressed = false;
@@ -68,8 +63,8 @@ public class GamePageController implements DefaultAnimation {
         timeLabel = new Label();
         startTime = Clock.systemUTC().millis();
         totalMiniBossKill = 0;
-        background.getChildren().add(Game.getPlane());
-        background.getChildren().add(Game.getBoss());
+        background.getChildren().add(Game.getInstance().getPlane());
+        background.getChildren().add(Game.getInstance().getBoss());
 
         ammoIcon = new ImageView(new Image(ammo.getUrl()));
         ammoIcon.setFitWidth(80);
@@ -92,7 +87,7 @@ public class GamePageController implements DefaultAnimation {
         bossHealthLabel.setText("600");
 
         background.getChildren().add(bossHealthBar);
-        background.getChildren().add(Game.getPlane().getHealthBar());
+        background.getChildren().add(Game.getInstance().getPlane().getHealthBar());
         background.getChildren().add(bossHealthLabel);
 
         timeLabel = new Label();
@@ -113,11 +108,11 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private void managePlane() {
-        background.getChildren().get(background.getChildren().indexOf(Game.getPlane())).requestFocus();
-        if (upPressed) Game.getPlane().moveUp();
-        if (downPressed) Game.getPlane().moveDown();
-        if (rightPressed) Game.getPlane().moveRight();
-        if (leftPressed) Game.getPlane().moveLeft();
+        background.getChildren().get(background.getChildren().indexOf(Game.getInstance().getPlane())).requestFocus();
+        if (upPressed) Game.getInstance().getPlane().moveUp();
+        if (downPressed) Game.getInstance().getPlane().moveDown();
+        if (rightPressed) Game.getInstance().getPlane().moveRight();
+        if (leftPressed) Game.getInstance().getPlane().moveLeft();
         if (spacePressed && (spacePressedTime == null ||
                 Duration.between(spacePressedTime, ZonedDateTime.now()).toMillis() / ammo.getDelay() > 1)) {
             fireAmmo();
@@ -156,13 +151,14 @@ public class GamePageController implements DefaultAnimation {
             Bullet bullet = new Bullet();
             bullet.fire(background);
             background.getChildren().add(bullet);
-            Game.getAllBullets().add(bullet);
+            Game.getInstance().getAllBullets().add(bullet);
+            if (!mainThemePlayer.isMute()) Audios.BULLET.getAudioClip().play();
         }
         else {
             Bomb bomb = new Bomb();
             bomb.fire();
             background.getChildren().add(bomb);
-            Game.getAllBombs().add(bomb);
+            Game.getInstance().getAllBombs().add(bomb);
         }
     }
 
@@ -170,7 +166,7 @@ public class GamePageController implements DefaultAnimation {
         for (int i = 0; i < 5; i++) {
             MiniBoss miniBoss = new MiniBoss(1700 + 200 * i, random.nextInt(600), random.nextBoolean());
             background.getChildren().add(miniBoss);
-            Game.getAllMiniBosses().add(miniBoss);
+            Game.getInstance().getAllMiniBosses().add(miniBoss);
             MiniBossMovementAnimation miniBossMovementAnimation = new MiniBossMovementAnimation(miniBoss, background);
             miniBossMovementAnimation.play();
         }
@@ -187,23 +183,23 @@ public class GamePageController implements DefaultAnimation {
 
     private void handleCollisions() {
 
-        if (planeIntersectsBoss() && Game.getPlane().getOpacity() == 1)
-            Game.getPlane().hit("boss");
+        if (planeIntersectsBoss() && Game.getInstance().getPlane().getOpacity() == 1)
+            Game.getInstance().getPlane().hit("boss");
 
-        for (int i = 0; i < Game.getAllBombs().size(); i++)
-            if (bombIntersectsBoss(Game.getAllBombs().get(i), Game.getBoss())) {
-                Game.getBoss().getBombed();
+        for (int i = 0; i < Game.getInstance().getAllBombs().size(); i++)
+            if (bombIntersectsBoss(Game.getInstance().getAllBombs().get(i), Game.getInstance().getBoss())) {
+                Game.getInstance().getBoss().getBombed();
                 changeBossStatus();
-                Game.getAllBombs().get(i).explode(background);
+                Game.getInstance().getAllBombs().get(i).explode(background);
                 updateHealthBar();
                 i--;
             }
 
-        for (int i = 0; i < Game.getAllBullets().size(); i++)
-            if (bulletIntersectsBoss(Game.getAllBullets().get(i), Game.getBoss())) {
-                Game.getBoss().getShot();
+        for (int i = 0; i < Game.getInstance().getAllBullets().size(); i++)
+            if (bulletIntersectsBoss(Game.getInstance().getAllBullets().get(i), Game.getInstance().getBoss())) {
+                Game.getInstance().getBoss().getShot();
                 changeBossStatus();
-                Game.getAllBullets().get(i).explode(background);
+                Game.getInstance().getAllBullets().get(i).explode(background);
                 updateHealthBar();
                 i--;
             }
@@ -211,12 +207,12 @@ public class GamePageController implements DefaultAnimation {
         for (int i = 0; i < background.getChildren().size(); i++) {
             Node child = background.getChildren().get(i);
             if (!(child instanceof Egg)) continue;
-            if (child.intersects(Game.getPlane().getBoundsInParent()) && Game.getPlane().getOpacity() == 1) {
-                Game.getPlane().hit("egg");
-                if (! mainThemePlayer.isMute()) {
-                    MediaPlayer mediaPlayer = new MediaPlayer(audios[random.nextInt(4) + 5]);
-                    mediaPlayer.play();
-                }
+            if (child.intersects(Game.getInstance().getPlane().getBoundsInParent()) && Game.getInstance().getPlane().getOpacity() == 1) {
+                Game.getInstance().getPlane().hit("egg");
+
+                if (! mainThemePlayer.isMute())
+                    Audios.valueOf("EGG_" + random.nextInt(4)).getAudioClip().play();
+
                 background.getChildren().remove(child);
                 i--;
             }
@@ -226,11 +222,11 @@ public class GamePageController implements DefaultAnimation {
             }
         }
 
-        for (int i = 0; i < Game.getAllBullets().size(); i++) {
-            for (MiniBoss miniBoss : Game.getAllMiniBosses()) {
-                if (miniBoss.intersects(Game.getAllBullets().get(i).getBoundsInParent())) {
-                    miniBoss.hit(background, false);
-                    Game.getAllBullets().get(i).explode(background);
+        for (int i = 0; i < Game.getInstance().getAllBullets().size(); i++) {
+            for (MiniBoss miniBoss : Game.getInstance().getAllMiniBosses()) {
+                if (miniBoss.intersects(Game.getInstance().getAllBullets().get(i).getBoundsInParent())) {
+                    miniBoss.hit(background, false, mainThemePlayer.isMute());
+                    Game.getInstance().getAllBullets().get(i).explode(background);
                     totalMiniBossKill++;
                     i--;
                     break;
@@ -238,19 +234,19 @@ public class GamePageController implements DefaultAnimation {
             }
         }
 
-        for (int i = 0; i < Game.getAllMiniBosses().size(); i++)
-            if (Game.getAllMiniBosses().get(i).intersects(Game.getPlane().getBoundsInParent()) &&
-                Game.getPlane().getOpacity() == 1) {
-                Game.getAllMiniBosses().get(i).hit(background, true);
-                Game.getPlane().hit("miniBoss");
+        for (int i = 0; i < Game.getInstance().getAllMiniBosses().size(); i++)
+            if (Game.getInstance().getAllMiniBosses().get(i).intersects(Game.getInstance().getPlane().getBoundsInParent()) &&
+                Game.getInstance().getPlane().getOpacity() == 1) {
+                Game.getInstance().getAllMiniBosses().get(i).hit(background, true, mainThemePlayer.isMute());
+                Game.getInstance().getPlane().hit("miniBoss");
                 i--;
             }
 
-        for (int i = 0; i < Game.getAllBombs().size(); i++) {
-            for (MiniBoss miniBoss : Game.getAllMiniBosses()) {
-                if (miniBoss.intersects(Game.getAllBombs().get(i).getBoundsInParent())) {
-                    miniBoss.hit(background, true);
-                    Game.getAllBombs().get(i).explode(background);
+        for (int i = 0; i < Game.getInstance().getAllBombs().size(); i++) {
+            for (MiniBoss miniBoss : Game.getInstance().getAllMiniBosses()) {
+                if (miniBoss.intersects(Game.getInstance().getAllBombs().get(i).getBoundsInParent())) {
+                    miniBoss.hit(background, true, mainThemePlayer.isMute());
+                    Game.getInstance().getAllBombs().get(i).explode(background);
                     totalMiniBossKill++;
                     i--;
                     break;
@@ -258,34 +254,34 @@ public class GamePageController implements DefaultAnimation {
             }
         }
 
-        if (Game.getPlane().getHealth() <= 0) endGame();
+        if (Game.getInstance().getPlane().getHealth() <= 0) endGame();
 
     }
 
     private void updateHealthBar() {
-        bossHealthBar.setProgress(Game.getBoss().getHealth() / 600);
-        bossHealthLabel.setText(""+(int)Game.getBoss().getHealth());
+        bossHealthBar.setProgress(Game.getInstance().getBoss().getHealth() / 600);
+        bossHealthLabel.setText(""+(int)Game.getInstance().getBoss().getHealth());
     }
 
     private void changeBossStatus() {
-        if (Game.getBoss().getHealth() <= 0) {
-            Game.getBoss().getBossAnimation().stop();
+        if (Game.getInstance().getBoss().getHealth() <= 0) {
+            Game.getInstance().getBoss().getBossAnimation().stop();
             BossDeathAnimation animation = new BossDeathAnimation();
             animation.play();
             animation.setOnFinished(event -> endGame());
             timeLine.stop();
+            timeLine.getKeyFrames().clear();
+            timeLine = null;
         }
-        else if (Game.getBoss().getHealth() % ((int)(Game.getBoss().getHealth() / 20) + 10) == 0) {
-            Game.getBoss().getBossAnimation().stop();
+        else if (Game.getInstance().getBoss().getHealth() % ((int)(Game.getInstance().getBoss().getHealth() / 20) + 10) == 0) {
+            Game.getInstance().getBoss().getBossAnimation().stop();
 
             BossBarfAnimation animation = new BossBarfAnimation(background);
 
             animation.play();
 
-            if (! mainThemePlayer.isMute()) {
-                MediaPlayer mediaPlayer = new MediaPlayer(audios[random.nextInt(5)]);
-                mediaPlayer.play();
-            }
+            if (! mainThemePlayer.isMute())
+                Audios.valueOf("SPIT_" + random.nextInt(5)).getAudioClip().play();
         }
     }
 
@@ -332,7 +328,7 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private boolean bulletIntersectsBoss(ImageView bullet, ImageView boss) {
-        if (!bullet.intersects(boss.getBoundsInParent())) return false;
+        if (!bullet.intersects(boss.getBoundsInParent()) || bullet.getImage() == null) return false;
 
         PixelReader bossPixelReader = boss.getImage().getPixelReader();
 
@@ -361,35 +357,40 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private boolean planeIntersectsBoss() {
-        if (!Game.getPlane().intersects(Game.getBoss().getBoundsInParent())) return false;
+        if (!Game.getInstance().getPlane().intersects(Game.getInstance().getBoss().getBoundsInParent())) return false;
 
-        double dist = Math.sqrt(Math.pow(Game.getBoss().getX() - Game.getPlane().getX(), 2) +
-                                Math.pow(Game.getBoss().getY() - Game.getPlane().getY(), 2));
+        double dist = Math.sqrt(Math.pow(Game.getInstance().getBoss().getX() - Game.getInstance().getPlane().getX(), 2) +
+                                Math.pow(Game.getInstance().getBoss().getY() - Game.getInstance().getPlane().getY(), 2));
         return dist < 500;
     }
 
     private void endGame() {
-        mainThemePlayer.stop();
         timeLine.stop();
+        timeLine.getKeyFrames().clear();
+        mainThemePlayer.stop();
+        Game.getInstance().getBoss().getBossAnimation().stop();
 
-        if (Game.getPlayer() == null) {
+        if (Game.getInstance().getPlayer() == null) {
             App.changePage("LoginAndRegistrationPage");
             return;
         }
 
         int score = 0, time = (int)(Clock.systemUTC().millis() - startTime) / 1000;
-        if (Game.getBoss().getHealth() <= 0 && time < 120) score = (int)(1.1 * (120 - time));
+        if (Game.getInstance().getBoss().getHealth() <= 0 && time < 120) score = (int)(1.1 * (120 - time));
 
         score += totalMiniBossKill;
-        Game.getPlayer().updateScore(score);
+        Game.getInstance().getPlayer().updateScore(score);
 
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(-0.5);
         background.setEffect(colorAdjust);
 
         ImageView quoteCard;
-        if (Game.getBoss().getHealth() <= 0) quoteCard = new ImageView(new Image("/Images/Game/win.png"));
-        else quoteCard = new ImageView(new Image("/Images/Game/lose.png"));
+        if (Game.getInstance().getBoss().getHealth() <= 0) quoteCard = new ImageView(new Image("/Images/Game/win.png"));
+        else {
+            quoteCard = new ImageView(new Image("/Images/Game/lose.png"));
+            Audios.LOSE.getAudioClip().play();
+        }
         quoteCard.setX(550);
         quoteCard.setY(100);
         quoteCard.setFitWidth(500);
@@ -407,14 +408,13 @@ public class GamePageController implements DefaultAnimation {
         ImageView planeProgress = new ImageView(new Image("/Images/Game/Plane/0.gif"));
         planeProgress.setFitHeight(56);
         planeProgress.setFitWidth(64);
-        planeProgress.setX(-0.662 * Game.getBoss().getHealth() + 970);
+        planeProgress.setX(-0.662 * Game.getInstance().getBoss().getHealth() + 970);
         planeProgress.setY(470);
         background.getChildren().add(planeProgress);
 
         background.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getSceneX() > 753 && mouseEvent.getSceneX() < 846 &&
                 mouseEvent.getSceneY() > 568 && mouseEvent.getSceneY() < 591) {
-                Game.startNewGame(Game.getPlayer());
                 App.changePage("GamePage");
             }
             if (mouseEvent.getSceneX() > 709 && mouseEvent.getSceneX() < 886 &&

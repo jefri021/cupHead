@@ -17,15 +17,15 @@ public class PlaneAnimation extends Transition {
         this.zeroToTen = zeroToTen;
         this.direction = direction;
         if (zeroToTen)
-            setOnFinished(event -> Game.getPlane().setImage(Images.valueOf("PLANE_" + direction.toUpperCase() + "_IDLE").getImg()));
+            setOnFinished(event -> Game.getInstance().getPlane().setImage(Images.valueOf("PLANE_" + direction.toUpperCase() + "_IDLE").getImg()));
         else
-            setOnFinished(event -> Game.getPlane().setImage(Images.PLANE_IDLE.getImg()));
+            setOnFinished(event -> Game.getInstance().getPlane().setImage(Images.PLANE_IDLE.getImg()));
     }
 
     @Override
     protected void interpolate(double frac) {
         int frame = (int)Math.floor(frac * 10);
         if (!zeroToTen) frame = 10 - frame;
-        Game.getPlane().setImage(Images.valueOf("PLANE_" + direction.toUpperCase() + "_" + frame).getImg());
+        Game.getInstance().getPlane().setImage(Images.valueOf("PLANE_" + direction.toUpperCase() + "_" + frame).getImg());
     }
 }

@@ -18,16 +18,16 @@ public class BossBarfAnimation extends Transition {
         this.setCycleDuration(Duration.millis(900));
         this.parent = parent;
         hasBarfed = false;
-        setOnFinished(event -> Game.getBoss().getBossAnimation().play());
+        setOnFinished(event -> Game.getInstance().getBoss().getBossAnimation().play());
     }
     @Override
     protected void interpolate(double frac) {
         int frame = (int)Math.floor(frac * 11);
-        Game.getBoss().setImage(Images.valueOf("BOSS_BARF_" + frame).getImg());
+        Game.getInstance().getBoss().setImage(Images.valueOf("BOSS_BARF_" + frame).getImg());
         if (frame == 3 && !hasBarfed) {
             hasBarfed = true;
             Egg egg = new Egg();
-            parent.getChildren().add(parent.getChildren().indexOf(Game.getBoss()) - 1, egg);
+            parent.getChildren().add(parent.getChildren().indexOf(Game.getInstance().getBoss()) - 1, egg);
             egg.fire(parent);
         }
     }

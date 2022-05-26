@@ -24,7 +24,8 @@ public class MainMenuPageController implements DefaultAnimation {
     public void initialize() {
         Media media = new Media(this.getClass().getResource("/Audios/opening.mp3").toString());
         mainTheme = new MediaPlayer(media);
-        mainTheme.setAutoPlay(true);
+        mainTheme.play();
+        mainTheme.setCycleCount(-1);
         startGameInit();
         initCustomButton((VBox)background.getChildren().get(1));
         initCustomButton((VBox)background.getChildren().get(2));
@@ -95,7 +96,6 @@ public class MainMenuPageController implements DefaultAnimation {
     }
 
     public void startGame() {
-        Game.startNewGame(Database.getInstance().getLoggedInUser());
         mainTheme.stop();
         timeline.stop();
         App.changePage("GamePage");

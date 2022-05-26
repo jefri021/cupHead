@@ -14,8 +14,8 @@ public class Egg extends ImageView {
 
     public Egg() {
         this.setImage(new Image("/Images/Game/Boss/Attack/Egg/egg.png"));
-        this.setX(Game.getBoss().getX() + 70);
-        this.setY(Game.getBoss().getY() + Game.getBoss().getImage().getHeight() / 2 - 20);
+        this.setX(Game.getInstance().getBoss().getX() + 70);
+        this.setY(Game.getInstance().getBoss().getY() + Game.getInstance().getBoss().getImage().getHeight() / 2 - 20);
     }
 
     public void fire (Pane parent) {

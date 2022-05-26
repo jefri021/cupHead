@@ -5,44 +5,56 @@ import View.Components.*;
 import java.util.ArrayList;
 
 public class Game {
-    private static User player;
-    private static Plane plane;
-    private static Boss boss;
+    private static Game instance;
 
-    private static ArrayList<Bullet> allBullets;
-    private static ArrayList <MiniBoss> allMiniBosses;
-    private static ArrayList <Bomb> allBombs;
-
-    public static void startNewGame (User player) {
-        Game.player = player;
-        Game.plane = new Plane();
-        Game.boss = new Boss();
-        Game.allBullets = new ArrayList<>();
-        Game.allMiniBosses = new ArrayList<>();
-        Game.allBombs = new ArrayList<>();
+    public static Game getInstance() {
+        if (instance == null)
+            instance = new Game(Database.getInstance().getLoggedInUser());
+        return instance;
     }
 
-    public static Boss getBoss() {
+    private final User player;
+    private final Plane plane;
+    private final Boss boss;
+
+    private final ArrayList<Bullet> allBullets;
+    private final ArrayList <MiniBoss> allMiniBosses;
+    private final ArrayList <Bomb> allBombs;
+
+    private Game (User player) {
+        this.player = player;
+        this.plane = new Plane();
+        this.boss = new Boss();
+        this.allBullets = new ArrayList<>();
+        this.allMiniBosses = new ArrayList<>();
+        this.allBombs = new ArrayList<>();
+    }
+
+    public Boss getBoss() {
         return boss;
     }
 
-    public static Plane getPlane() {
+    public Plane getPlane() {
         return plane;
     }
 
-    public static User getPlayer() {
+    public User getPlayer() {
         return player;
     }
 
-    public static ArrayList<Bullet> getAllBullets() {
+    public ArrayList<Bullet> getAllBullets() {
         return allBullets;
     }
 
-    public static ArrayList<MiniBoss> getAllMiniBosses() {
+    public ArrayList<MiniBoss> getAllMiniBosses() {
         return allMiniBosses;
     }
 
-    public static ArrayList<Bomb> getAllBombs() {
+    public ArrayList<Bomb> getAllBombs() {
         return allBombs;
+    }
+
+    public static void setInstance (Game Null) {
+        instance = Null;
     }
 }

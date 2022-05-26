@@ -14,7 +14,7 @@ public class MiniBossMovementAnimation extends Transition {
         this.setCycleDuration(Duration.seconds(13));
         this.setCycleCount(1);
         this.setOnFinished(event -> {
-            miniBoss.hit(parent, true);
+            miniBoss.hit(parent, true, true);
         });
     }
 

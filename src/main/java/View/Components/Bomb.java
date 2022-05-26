@@ -11,8 +11,8 @@ public class Bomb extends ImageView {
 
     public Bomb() {
         this.setImage(new Image("/Images/Game/Bomb/Travel/0.png"));
-        this.setX(Game.getPlane().getX() + 20);
-        this.setY(Game.getPlane().getY() + 60);
+        this.setX(Game.getInstance().getPlane().getX() + 20);
+        this.setY(Game.getInstance().getPlane().getY() + 60);
     }
 
     public void move (double dx, double dy) {
@@ -31,7 +31,7 @@ public class Bomb extends ImageView {
         if (animation != null) animation.stop();
         BombExplosionAnimation explosionAnimation = new BombExplosionAnimation(this);
         explosionAnimation.play();
-        Game.getAllBombs().remove(this);
+        Game.getInstance().getAllBombs().remove(this);
         explosionAnimation.setOnFinished(event -> parent.getChildren().remove(this));
     }
 }

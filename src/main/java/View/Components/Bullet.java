@@ -1,6 +1,7 @@
 package View.Components;
 
 import Model.Game;
+import View.Audios;
 import View.Transitions.BulletExplosionAnimation;
 import View.Transitions.BulletFireAnimation;
 import View.Transitions.BulletMovementAnimation;
@@ -13,8 +14,8 @@ import javafx.scene.layout.Pane;
 public class Bullet extends ImageView {
 
     public Bullet() {
-        double planeX = Game.getPlane().getX(),
-                planeY = Game.getPlane().getY();
+        double planeX = Game.getInstance().getPlane().getX(),
+                planeY = Game.getInstance().getPlane().getY();
         this.setX(planeX + 80);
         this.setY(planeY - 5);
     }
@@ -38,7 +39,7 @@ public class Bullet extends ImageView {
             movementAnimation = new BulletMovementAnimation(Bullet.this);
             movementAnimation.play();
             movementAnimation.setOnFinished(event1 -> {
-                Game.getAllBullets().remove(Bullet.this);
+                Game.getInstance().getAllBullets().remove(Bullet.this);
                 parent.getChildren().remove(Bullet.this);
             });
         });
@@ -49,7 +50,7 @@ public class Bullet extends ImageView {
         if (movementAnimation != null) movementAnimation.stop();
         BulletExplosionAnimation animation = new BulletExplosionAnimation(this);
         animation.play();
-        Game.getAllBullets().remove(this);
+        Game.getInstance().getAllBullets().remove(this);
         animation.setOnFinished(event -> parent.getChildren().remove(this));
     }
 }

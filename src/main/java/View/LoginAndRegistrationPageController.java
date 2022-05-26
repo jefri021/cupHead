@@ -34,7 +34,6 @@ public class LoginAndRegistrationPageController implements DefaultAnimation {
     }
 
     public void playAsGuest() {
-        Game.startNewGame(null);
         App.changePage("GamePage");
     }
 
