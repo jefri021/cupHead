@@ -11,11 +11,10 @@ public class MiniBossMovementAnimation extends Transition {
 
     public MiniBossMovementAnimation (MiniBoss miniBoss, Pane parent) {
         this.miniBoss = miniBoss;
-        this.setCycleDuration(Duration.seconds(11));
+        this.setCycleDuration(Duration.seconds(13));
         this.setCycleCount(1);
         this.setOnFinished(event -> {
-            Game.getAllMiniBosses().remove(miniBoss);
-            parent.getChildren().remove(miniBoss);
+            miniBoss.hit(parent, true);
         });
     }
 

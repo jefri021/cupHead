@@ -18,6 +18,6 @@ public class EggAnimation extends Transition {
     protected void interpolate(double frac) {
         int rotation = (int)Math.floor(frac * 12) * 30;
         egg.setRotate(rotation);
-        egg.move(10);
+        egg.move(15);
     }
 }

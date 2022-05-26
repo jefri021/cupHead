@@ -22,18 +22,11 @@ public class BulletFireAnimation extends Transition {
 
     @Override
     protected void interpolate(double frac) {
-        if (bullet == null) return;
         int frame = (int)Math.floor(frac * 3);
         bullet.setImage(new Image("/Images/Game/Bullet/Fire/" + frame + ".png"));
 
         ColorAdjust brightness = new ColorAdjust();
         brightness.setBrightness(-0.1);
         bullet.setEffect(brightness);
-
-        ObservableList <Node> children = bullet.getParent().getChildrenUnmodifiable();
-        double planeX = ((ImageView)(children.get(children.indexOf(Game.getPlane())))).getX(),
-                planeY = ((ImageView)(children.get(children.indexOf(Game.getPlane())))).getY();
-        bullet.setX(planeX + 80);
-        bullet.setY(planeY - 5);
     }
 }

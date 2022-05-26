@@ -1,6 +1,7 @@
 package View.Transitions;
 
 import View.Components.Bomb;
+import View.Images;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
@@ -18,6 +19,6 @@ public class BombExplosionAnimation extends Transition {
     @Override
     protected void interpolate(double frac) {
         int frame = (int)Math.floor(frac * 6);
-        bomb.setImage(new Image("/Images/Game/Bomb/Dust/" + frame + ".png"));
+        bomb.setImage(Images.valueOf("BOMB_DUST_" + frame).getImg());
     }
 }

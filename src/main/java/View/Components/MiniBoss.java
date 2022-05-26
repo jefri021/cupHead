@@ -1,6 +1,7 @@
 package View.Components;
 
 import Model.Game;
+import View.Images;
 import View.Transitions.MiniBossDeathAnimation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,8 +19,8 @@ public class MiniBoss extends ImageView {
     public MiniBoss(int startingX, int startingY, boolean isPurple) {
         this.setX(startingX);
         this.setY(startingY);
-        if (isPurple) this.setImage(new Image("/Images/Game/Boss/MiniBoss/purple/purple.gif"));
-        else this.setImage(new Image("/Images/Game/Boss/MiniBoss/yellow/yellow.gif"));
+        if (isPurple) this.setImage(Images.PURPLE.getImg());
+        else this.setImage(Images.YELLOW.getImg());
         this.isPurple = isPurple;
         this.HP = 3;
     }

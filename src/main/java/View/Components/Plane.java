@@ -24,28 +24,28 @@ public class Plane extends ImageView {
 
     public void moveLeft() {
         if (this.getX() > 2) {
-            this.setX(this.getX() - 5);
+            this.setX(this.getX() - 7);
             healthBar.setLayoutX(this.getX());
         }
     }
 
     public void moveRight() {
         if (this.getX() < 1485) {
-            this.setX(this.getX() + 5);
+            this.setX(this.getX() + 7);
             healthBar.setLayoutX(this.getX());
         }
     }
 
     public void moveDown() {
         if (this.getY() < 701) {
-            this.setY(this.getY() + 5);
+            this.setY(this.getY() + 7);
             healthBar.setLayoutY(this.getY() - 20);
         }
     }
 
     public void moveUp() {
         if (this.getY() > 2) {
-            this.setY(this.getY() - 5);
+            this.setY(this.getY() - 7);
             healthBar.setLayoutY(this.getY() - 20);
         }
     }

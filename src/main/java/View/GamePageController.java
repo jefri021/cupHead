@@ -17,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -155,23 +154,21 @@ public class GamePageController implements DefaultAnimation {
     private void fireAmmo() {
         if (ammo.equals(AmmoType.BULLET)) {
             Bullet bullet = new Bullet();
+            bullet.fire(background);
             background.getChildren().add(bullet);
             Game.getAllBullets().add(bullet);
-            bullet.fire(background);
         }
         else {
             Bomb bomb = new Bomb();
+            bomb.fire();
             background.getChildren().add(bomb);
             Game.getAllBombs().add(bomb);
-            bomb.fire();
         }
     }
 
     private void spawnMiniBossLine() {
-        int startingY = (int)(Math.random() * (600));
-        if (Game.getPlane().getY() < 290 || Game.getPlane().getY() > 500) startingY = (int)Game.getPlane().getY();
         for (int i = 0; i < 5; i++) {
-            MiniBoss miniBoss = new MiniBoss(1700 + 200 * i, startingY, random.nextBoolean());
+            MiniBoss miniBoss = new MiniBoss(1700 + 200 * i, random.nextInt(600), random.nextBoolean());
             background.getChildren().add(miniBoss);
             Game.getAllMiniBosses().add(miniBoss);
             MiniBossMovementAnimation miniBossMovementAnimation = new MiniBossMovementAnimation(miniBoss, background);
@@ -190,7 +187,7 @@ public class GamePageController implements DefaultAnimation {
 
     private void handleCollisions() {
 
-        if (Game.getPlane().intersects(Game.getBoss().getBoundsInParent()) && Game.getPlane().getOpacity() == 1)
+        if (planeIntersectsBoss() && Game.getPlane().getOpacity() == 1)
             Game.getPlane().hit("boss");
 
         for (int i = 0; i < Game.getAllBombs().size(); i++)
@@ -278,10 +275,10 @@ public class GamePageController implements DefaultAnimation {
             animation.setOnFinished(event -> endGame());
             timeLine.stop();
         }
-        else if (Game.getBoss().getHealth() % 10 == 0 && Game.getPlane().getY() > 200 && Game.getPlane().getY() < 600) {
+        else if (Game.getBoss().getHealth() % ((int)(Game.getBoss().getHealth() / 20) + 10) == 0) {
             Game.getBoss().getBossAnimation().stop();
 
-            BossEggAttackAnimation animation = new BossEggAttackAnimation(background);
+            BossBarfAnimation animation = new BossBarfAnimation(background);
 
             animation.play();
 
@@ -335,27 +332,23 @@ public class GamePageController implements DefaultAnimation {
     }
 
     private boolean bulletIntersectsBoss(ImageView bullet, ImageView boss) {
-        if (!bullet.intersects(boss.getBoundsInParent()) || bullet.getY() < 223) return false;
-
-        if (bullet.getY() < 321) {
-            double minX = (-57 * bullet.getY()) / 64 + 1355 - 40;
-            return bullet.getX() > minX;
-        }
+        if (!bullet.intersects(boss.getBoundsInParent())) return false;
 
         PixelReader bossPixelReader = boss.getImage().getPixelReader();
 
-        int intersections = 0;
+        int x = (int)(bullet.getX() + bullet.getImage().getWidth() - boss.getX() - 100);
+        if (x < 0) return false;
 
-        for (int y = (int)(bullet.getY() - boss.getLayoutY()); y < boss.getImage().getHeight(); y++) {
-            if (y < 0) continue;
-            int x = (int)(bullet.getX() - boss.getLayoutX() - 10);
-            if (x < 0) continue;
-            Color pxColor = bossPixelReader.getColor(x, y);
-            if (pxColor.getOpacity() == 1)
-                intersections++;
+        for (int y = (int)(bullet.getY() - boss.getY()); y < (int)(bullet.getY() - boss.getY()) + bullet.getImage().getHeight(); y++) {
+            try {
+                Color pxColor = bossPixelReader.getColor(x, y);
+                if (pxColor.getOpacity() == 1)
+                    return true;
+            }
+            catch (Exception ignored) {
+            }
         }
-
-        return intersections > bullet.getImage().getHeight() / 2.5;
+        return false;
     }
 
     private boolean bombIntersectsBoss (ImageView bomb, ImageView boss) {
@@ -367,9 +360,18 @@ public class GamePageController implements DefaultAnimation {
         return minY < bomb.getY();
     }
 
+    private boolean planeIntersectsBoss() {
+        if (!Game.getPlane().intersects(Game.getBoss().getBoundsInParent())) return false;
+
+        double dist = Math.sqrt(Math.pow(Game.getBoss().getX() - Game.getPlane().getX(), 2) +
+                                Math.pow(Game.getBoss().getY() - Game.getPlane().getY(), 2));
+        return dist < 500;
+    }
+
     private void endGame() {
         mainThemePlayer.stop();
         timeLine.stop();
+
         if (Game.getPlayer() == null) {
             App.changePage("LoginAndRegistrationPage");
             return;
@@ -377,6 +379,7 @@ public class GamePageController implements DefaultAnimation {
 
         int score = 0, time = (int)(Clock.systemUTC().millis() - startTime) / 1000;
         if (Game.getBoss().getHealth() <= 0 && time < 120) score = (int)(1.1 * (120 - time));
+
         score += totalMiniBossKill;
         Game.getPlayer().updateScore(score);
 
@@ -420,5 +423,4 @@ public class GamePageController implements DefaultAnimation {
             }
         });
     }
-
 }

@@ -12,6 +12,13 @@ import javafx.scene.layout.Pane;
 
 public class Bullet extends ImageView {
 
+    public Bullet() {
+        double planeX = Game.getPlane().getX(),
+                planeY = Game.getPlane().getY();
+        this.setX(planeX + 80);
+        this.setY(planeY - 5);
+    }
+
     public void move (double dx) {
         this.setX(this.getX() + dx);
     }
@@ -23,15 +30,12 @@ public class Bullet extends ImageView {
         fireAnimation = new BulletFireAnimation(this);
         fireAnimation.play();
         fireAnimation.setOnFinished(event -> {
-            ObservableList <Node> children = Bullet.this.getParent().getChildrenUnmodifiable();
             Bullet.this.setImage(new Image("/Images/Game/Bullet/Travel/0.png"));
             Bullet.this.setFitWidth(72);
             Bullet.this.setFitHeight(15);
-            double planeX = ((ImageView)(children.get(children.indexOf(Game.getPlane())))).getX(),
-                    planeY = ((ImageView)(children.get(children.indexOf(Game.getPlane())))).getY();
-            Bullet.this.setX(planeX + 90);
-            Bullet.this.setY(planeY + 35);
-            movementAnimation = new BulletMovementAnimation(Bullet.this, parent);
+            Bullet.this.setX(Bullet.this.getX() + 10);
+            Bullet.this.setY(Bullet.this.getY() + 40);
+            movementAnimation = new BulletMovementAnimation(Bullet.this);
             movementAnimation.play();
             movementAnimation.setOnFinished(event1 -> {
                 Game.getAllBullets().remove(Bullet.this);

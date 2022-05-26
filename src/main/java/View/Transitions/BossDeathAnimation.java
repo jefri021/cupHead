@@ -1,6 +1,5 @@
 package View.Transitions;
 
-import Application.App;
 import Model.Game;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
@@ -11,6 +10,7 @@ public class BossDeathAnimation extends Transition {
     public BossDeathAnimation() {
         this.setCycleCount(1);
         this.setCycleDuration(Duration.millis(1200));
+        setOnFinished(actionEvent -> Game.getBoss().setOpacity(0));
     }
 
     @Override

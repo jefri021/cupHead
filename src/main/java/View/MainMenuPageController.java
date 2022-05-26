@@ -24,7 +24,7 @@ public class MainMenuPageController implements DefaultAnimation {
     public void initialize() {
         Media media = new Media(this.getClass().getResource("/Audios/opening.mp3").toString());
         mainTheme = new MediaPlayer(media);
-        mainTheme.play();
+        mainTheme.setAutoPlay(true);
         startGameInit();
         initCustomButton((VBox)background.getChildren().get(1));
         initCustomButton((VBox)background.getChildren().get(2));

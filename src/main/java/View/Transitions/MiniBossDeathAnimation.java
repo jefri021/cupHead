@@ -1,6 +1,7 @@
 package View.Transitions;
 
 import View.Components.MiniBoss;
+import View.Images;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
@@ -18,12 +19,12 @@ public class MiniBossDeathAnimation extends Transition {
     @Override
     protected void interpolate(double frac) {
         int frame = (int)Math.floor(frac * 10);
-        String address;
+        String color;
         if (miniBoss.isPurple())
-            address = "/Images/Game/Boss/MiniBoss/purple/Death/" + frame + ".png";
+            color = "PURPLE";
         else
-            address = "/Images/Game/Boss/MiniBoss/yellow/Death/" + frame + ".png";
-        miniBoss.setImage(new Image(address));
+            color = "YELLOW";
+        miniBoss.setImage(Images.valueOf(color + "_DEATH_" + frame).getImg());
         miniBoss.setFitWidth(157);
         miniBoss.setFitHeight(114);
     }
